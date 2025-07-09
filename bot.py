@@ -1,5 +1,6 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import requests
+from keep_alive import keep_alive  # 👈 Flask server for uptime
 
 TOKEN = "7303738732:AAGE0rev64-g-v9AtpFcHbKXbvXPxyMDQqU"
 SHRINKME_API = "c3a2e846fc7413b6af5a19fba7c75f089e06f6ae"
@@ -30,6 +31,7 @@ def handle_message(update, context):
         update.message.reply_text("⚠️ Something went wrong while shortening the link.")
 
 def main():
+    keep_alive()  # 👈 Start Flask server to keep Replit alive
     print("🚀 Bot is starting...")
     updater = Updater(TOKEN, use_context=True)
     dp = updater.dispatcher
